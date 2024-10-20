@@ -3,6 +3,7 @@ import sendResponse from '../helpers/response.helper';
 import { getUser, getUsers } from '../methods/get.method';
 import postUser from '../methods/post.method';
 import updateUser from '../methods/put.method';
+import deleteUser from '../methods/delete.method';
 
 const LINKS = {
   main: '/api/users',
@@ -29,6 +30,10 @@ export default function urlController(req: IncomingMessage, res: ServerResponse)
 
     if (req.method === 'PUT') {
       if (fixedAddress?.includes(LINKS.main) && id) updateUser(req, res, id);
+    }
+
+    if (req.method === 'DELETE') {
+      if (fixedAddress?.includes(LINKS.main) && id) deleteUser(res, id);
     }
   } catch {
     sendResponse(
