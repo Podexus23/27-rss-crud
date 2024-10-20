@@ -60,6 +60,61 @@ describe('1. Test base functionality of methods GET POST PUT DELETE', () => {
   });
 });
 
+describe('2. Test for wrong body or ID', () => {
+  const testID = 'fbf589e0-942f-11ed-b879-91858c42770e';
+  const testID2 = '7c186260-942f-11ed-b879-91858c42770e';
+  it('GET wrong ID /api/users/{userID}', async () => {
+    const app = await request(server).get(`/api/users/${testID}2`);
+    expect(app.statusCode).toBe(400);
+    expect(app.body.data).toBe('sorry wrong ID');
+  });
+  it('POST wrong Body type /api/users', async () => {
+    const newUserData = {
+      username: 'Bombaster',
+      age: '23',
+      hobbies: ['jogging'],
+    };
+    const app = await request(server)
+      .post('/api/users')
+      .set('Content-type', 'application/json')
+      .send(newUserData);
+    expect(app.statusCode).toBe(400);
+    expect(app.body.data).toBe('Body does not contain required fields or type is wrong');
+  });
+  it('PUT wrong ID /api/users/{userID}', async () => {
+    const newUserData = {
+      username: 'Bombaster',
+      age: 23,
+      hobbies: ['jogging'],
+      id: testID,
+    };
+    const app = await request(server)
+      .put(`/api/users/${testID}a`)
+      .set('Content-type', 'application/json')
+      .send(newUserData);
+    expect(app.statusCode).toBe(400);
+    expect(app.body.data).toBe('sorry wrong ID');
+  });
+  it('PUT wrong body /api/users/{userID}', async () => {
+    const newUserData = {
+      username: 'Bombaster',
+      hobbies: ['jogging'],
+      id: testID,
+    };
+    const app = await request(server)
+      .put(`/api/users/${testID2}`)
+      .set('Content-type', 'application/json')
+      .send(newUserData);
+    expect(app.statusCode).toBe(400);
+    expect(app.body.data).toBe('Body does not contain required fields or type is wrong');
+  });
+  it('DELETE wrong ID /api/users/{userID}', async () => {
+    const app = await request(server).delete(`/api/users/${testID}a`);
+    expect(app.statusCode).toBe(400);
+    expect(app.body.data).toBe('sorry wrong ID');
+  });
+});
+
 afterAll((done) => {
   server.close();
   done();
