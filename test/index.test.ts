@@ -115,6 +115,38 @@ describe('2. Test for wrong body or ID', () => {
   });
 });
 
+describe('3. Test 404 situations', () => {
+  const testID = 'fbf589e0-942f-11ed-b879-91858c42770e';
+  it('wrong address /api/use', async () => {
+    const app = await request(server).get('/api/use');
+    expect(app.statusCode).toBe(404);
+    expect(app.body.data).toBe('Sorry. Page not found');
+  });
+  it('GET valid ID but user deleted /api/users/{userID}', async () => {
+    const app = await request(server).get(`/api/users/${testID}`);
+    expect(app.statusCode).toBe(404);
+    expect(app.body.data).toBe('User not found');
+  });
+  it('PUT valid ID but not in a base /api/users/{userID}', async () => {
+    const newUserData = {
+      username: 'Bombaster',
+      age: 23,
+      hobbies: ['jogging'],
+      id: testID,
+    };
+    const app = await request(server)
+      .put(`/api/users/${testID}`)
+      .set('Content-type', 'application/json')
+      .send(newUserData);
+    expect(app.statusCode).toBe(404);
+    expect(app.body.data).toBe('User not found');
+  });
+  it('DELETE valid ID but not in a base /api/users/{userID}', async () => {
+    const app = await request(server).delete(`/api/users/${testID}`);
+    expect(app.statusCode).toBe(404);
+    expect(app.body.data).toBe('User not found');
+  });
+});
 afterAll((done) => {
   server.close();
   done();
