@@ -1,6 +1,6 @@
 import { ServerResponse } from 'http';
 import { validate } from 'uuid';
-import userData from '../users/usersData';
+import { userData } from '../users/usersData';
 import sendResponse from '../helpers/response.helper';
 
 function getUsers(res: ServerResponse) {

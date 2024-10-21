@@ -1,7 +1,7 @@
 import { ServerResponse } from 'http';
 import { validate } from 'uuid';
 import sendResponse from '../helpers/response.helper';
-import userData from '../users/usersData';
+import { userData } from '../users/usersData';
 
 export default function deleteUser(res: ServerResponse, id: string) {
   try {

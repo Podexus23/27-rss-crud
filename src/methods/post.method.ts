@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { v1 } from 'uuid';
 import sendResponse from '../helpers/response.helper';
-import userData from '../users/usersData';
+import { userData } from '../users/usersData';
 import { checkNewUserData } from '../helpers/checkers.helper';
 
 export default function postUser(req: IncomingMessage, res: ServerResponse) {

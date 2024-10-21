@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'node:http';
 import { validate } from 'uuid';
 import sendResponse from '../helpers/response.helper';
-import userData from '../users/usersData';
+import { userData } from '../users/usersData';
 import { checkNewUserData } from '../helpers/checkers.helper';
 
 export default function updateUser(req: IncomingMessage, res: ServerResponse, id: string) {
