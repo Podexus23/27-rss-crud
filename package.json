@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "start:dev": "cross-env NODE_MODE=development npx nodemon ./src/index.ts",
+    "start:multidev": "cross-env NODE_ENV=production npx nodemon ./src/cluster.ts",
     "start:multi": "cross-env NODE_ENV=production ts-node ./src/cluster.ts",
     "start:prod": "cross-env NODE_MODE=production tsc && node ./dist/src/index.js",
     "lint": "eslint src/**/*.ts",

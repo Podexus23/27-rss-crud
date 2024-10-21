@@ -1,4 +1,4 @@
-import { IUser } from './users.interface';
+import { IUser, IUserCluster } from './users.interface';
 
 export const userData: IUser[] = [
   {
@@ -15,11 +15,11 @@ export const userData: IUser[] = [
   },
 ];
 
-export const clusterData: { [key: string]: IUser } = {
-  '7c186260-942f-11ed-b879-91858c42770e': {
+export const clusterData: IUserCluster[] = [
+  {
     username: 'Tony',
     age: 23,
     hobbies: [],
-    id: '7c186260-942f-11ed-b879-91858c42770e',
+    key: '7c186260-942f-11ed-b879-91858c42770e',
   },
-};
+];
