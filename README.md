@@ -11,6 +11,7 @@
 
 - `npm run start:dev` Run app in development mode with nodemon
 - `npm run start:prod` Run app in production mode (make bundle and run it)
+- `npm run start:multi` Run app with cluster API
 - `npm run lint` Eslint check ts files for lint errors
 - `npm run format` Eslint tries to fix lint errors
 - `npm run test` Run jest for testing app
